@@ -1,16 +1,20 @@
 require 'sinatra'
 require 'slim'
+require 'sass'
 require 'sinatra/reloader' if development?
+
 
 set :public_folder, 'assets'
 # set :views, 'templates'
+
+get ('/style.css') {scss :style}
 
 get '/' do
 	slim :home
 end
 
 get '/about' do
-	@title = "All about this wpebsite"
+	@title = "All about this website"
 	slim :about
 end
 
