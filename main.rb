@@ -1,24 +1,25 @@
 require 'sinatra'
+require 'slim'
 require 'sinatra/reloader' if development?
 
 set :public_folder, 'assets'
 # set :views, 'templates'
 
 get '/' do
-	erb :home
+	slim :home
 end
 
 get '/about' do
-	@title = "All about this website"
-	erb :about
+	@title = "All about this wpebsite"
+	slim :about
 end
 
 get '/contact' do
-	erb :contact
+	slim :contact
 end
 
 not_found do
-	erb :not_found
+	slim :not_found
 end
 
 get '/fake-error' do
@@ -28,5 +29,5 @@ end
 
 get '/instance' do
 	@name = "DAZ"
-	erb :show
+	slim :show
 end
