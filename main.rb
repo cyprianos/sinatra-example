@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'slim'
 require 'sass'
-require 'sinatra/reloader' if development?
+require 'sinatra/reloader' if settings.development?
 
 require './song.rb'
 
@@ -24,9 +24,6 @@ get '/contact' do
 	slim :contact
 end
 
-not_found do
-	slim :not_found
-end
 
 get '/fake-error' do
 	status 500
@@ -72,4 +69,22 @@ delete '/songs/:id' do
 	song = Song.get(params[:id])
 	song.destroy
 	redirect to("/songs")
+end
+
+get '/env' do
+
+	if settings.development?
+		"development"
+	elsif settings.production?
+		"production"
+	elsif settings.test?
+		"test"
+	else
+		"Who knows what environment you're in!"
+	end
+end
+
+
+not_found do
+	slim :not_found
 end
